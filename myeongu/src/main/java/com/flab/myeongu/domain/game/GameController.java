@@ -1,34 +1,37 @@
 package com.flab.myeongu.domain.game;
 
-import com.flab.myeongu.domain.member.Member;
+import com.flab.myeongu.domain.DTO.GameStartDTO;
+import com.flab.myeongu.domain.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 public class GameController {
 
-    private final GameService gameService;
+    private final GameRepository gameRepository;
 
-    @GetMapping("/game/start")
-    public String gameStart() {
+    @PostMapping("/game/start")
+    public JSONObject gameStart() {
 
-        gameService.createGame();
+        Game game = Game.builder()
+                .remainingCount(0)
+                .success(true)
+                .build();
 
-        return "ok";
+        gameRepository.save(game);
+
+        JSONObject data1 = new JSONObject();
+        data1.put("roomId", game.getRoomId());
+
+        JSONObject data2 = new JSONObject();
+        data2.put("success", game.isSuccess());
+        data2.put("data", data1);
+
+        return data2;
     }
 
-    @PostMapping("/game/{roomId}/answer")
-    public String playGame(@PathVariable Long roomId) {
-
-        return "ok";
-    }
 
 }
