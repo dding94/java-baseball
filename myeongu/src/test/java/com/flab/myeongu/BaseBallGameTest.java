@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -56,6 +58,13 @@ class BaseBallGameTest {
             }
             out++;
         }
+    }
+
+    @Test
+    void HashMapTest() {
+        Map<String, ArrayList<Integer>> hm = new HashMap<>();
+
+
     }
 
 

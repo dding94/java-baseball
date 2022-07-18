@@ -21,8 +21,10 @@ public class GameService {
             //종료시
         }
 
-        gameRepository.update(game);
-        game.setScore(answerCheck(game, userAnswer));
+        if (gameRepository.isPlayCheck(game)) {
+            Score score = answerCheck(game, userAnswer);
+            gameRepository.saveHistory(game, score, userAnswer);
+        }
 
         return game;
     }
