@@ -1,10 +1,10 @@
-package com.flab.myeongu.domain.score;
+package com.flab.myeongu.domain.dto;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
+@Builder
 public class ScoreDTO {
     private String answer;
     private int strike;

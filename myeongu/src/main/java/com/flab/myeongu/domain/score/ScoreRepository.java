@@ -1,5 +1,6 @@
 package com.flab.myeongu.domain.score;
 
+import com.flab.myeongu.domain.dto.ScoreDTO;
 import com.flab.myeongu.domain.game.Game;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -18,11 +19,12 @@ public class ScoreRepository {
 
         Score score = game.getScore();
 
-        ScoreDTO scoreDTO = new ScoreDTO();
-        scoreDTO.setStrike(score.getStrike());
-        scoreDTO.setBall(score.getBall());
-        scoreDTO.setOut(score.getOut());
-        scoreDTO.setAnswer(userAnswer);
+        ScoreDTO scoreDTO = ScoreDTO.builder()
+                .strike(score.getStrike())
+                .ball(score.getBall())
+                .out(score.getOut())
+                .answer(userAnswer)
+                .build();
 
         ArrayList<ScoreDTO> list = history.getOrDefault(game.getRoomId(), new ArrayList<ScoreDTO>());
         list.add(scoreDTO);

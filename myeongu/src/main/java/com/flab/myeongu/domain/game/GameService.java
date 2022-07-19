@@ -21,10 +21,13 @@ public class GameService {
             //종료시
         }
 
-        if (gameRepository.isPlayCheck(game)) {
-            Score score = answerCheck(game, userAnswer);
-            gameRepository.saveHistory(game, score, userAnswer);
+        if (!gameRepository.isPlayCheck(game)) {
+            //?
+            throw new RuntimeException();
         }
+
+        Score score = answerCheck(game, userAnswer);
+        gameRepository.saveHistory(game, score, userAnswer);
 
         return game;
     }

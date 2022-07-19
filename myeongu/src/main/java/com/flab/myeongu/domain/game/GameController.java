@@ -1,8 +1,8 @@
 package com.flab.myeongu.domain.game;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flab.myeongu.domain.InputRequestVO;
-import com.flab.myeongu.domain.score.ScoreDTO;
+import com.flab.myeongu.domain.dto.GamePlayDTO;
+import com.flab.myeongu.domain.dto.ScoreDTO;
 import com.flab.myeongu.domain.score.ScoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -10,6 +10,8 @@ import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,6 +39,7 @@ public class GameController {
 
     @GetMapping("/game/{roomId}")
     public JSONObject gameResult(@PathVariable Long roomId) {
+
         Game findGame = gameRepository.findByRoomId(roomId);
 
         return gameResultToJSON(findGame);
@@ -44,7 +47,7 @@ public class GameController {
 
     @GetMapping("/game/{roomId}/history")
     public JSONObject gameHistory(@PathVariable Long roomId) {
-        //todo
+
         Game findGame = gameRepository.findByRoomId(roomId);
         ArrayList<ScoreDTO> history = scoreRepository.findHistory(findGame.getRoomId());
 
@@ -76,25 +79,28 @@ public class GameController {
         data1.put("answerCount", findGame.getAnswerCount());
 
         JSONObject data2 = new JSONObject();
-        data2.put("data", data1);
         data2.put("success", findGame.isSuccess());
+        data2.put("data", data1);
 
         return data2;
     }
 
     private JSONObject gamePlayDataToJSON(Game game) {
-        JSONObject data1 = new JSONObject();
-        data1.put("correct", game.getScore().isCorrect());
-        data1.put("remainingCount", game.getRemainingCount());
-        data1.put("strike", game.getScore().getStrike());
-        data1.put("ball", game.getScore().getBall());
-        data1.put("out", game.getScore().getOut());
+        GamePlayDTO gamePlayDTO = GamePlayDTO.builder()
+                .correct(game.getScore().isCorrect())
+                .remainingCount(game.getRemainingCount())
+                .strike(game.getScore().getStrike())
+                .ball(game.getScore().getBall())
+                .out(game.getScore().getOut())
+                .build();
 
-        JSONObject data2 = new JSONObject();
-        data2.put("data", data1);
-        data2.put("success", game.isSuccess());
+        Map<Object, Object> obj = new LinkedHashMap<>();
+        obj.put("success", game.isSuccess());
+        obj.put("data", gamePlayDTO);
 
-        return data2;
+        JSONObject data = new JSONObject(obj);
+
+        return data;
     }
 
     private JSONObject gameStartDataToJSON(Game game) {

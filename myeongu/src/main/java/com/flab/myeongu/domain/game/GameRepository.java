@@ -36,6 +36,7 @@ public class GameRepository {
         game.setAnswerCount(game.getAnswerCount() + 1);
 
         if (game.getRemainingCount() < 0 || game.getAnswerCount() > 10) {
+            game.setSuccess(false);
             return false;
         }
 
