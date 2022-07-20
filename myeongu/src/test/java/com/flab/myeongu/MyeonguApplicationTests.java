@@ -9,5 +9,4 @@ class MyeonguApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

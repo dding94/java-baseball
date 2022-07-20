@@ -1,1 +1,19 @@
-GET http://localhost:8080/game/start
+GET http://localhost:8080/game/1/history
+Content-Type: application/json
+
+###
+GET http://localhost:8080/game/1
+Accept: application/json
+
+###
+POST http://localhost:8080/game/1/answer
+Content-Type: application/json
+
+{
+  "answer" : "345"
+}
+
+###
+POST http://localhost:8080/game/start
+
+

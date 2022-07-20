@@ -1,22 +1,19 @@
 package com.flab.myeongu;
 
-import com.flab.myeongu.domain.member.Member;
-import com.flab.myeongu.domain.member.MemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
 
 class BaseBallGameTest {
 
-    MemberRepository memberRepository = new MemberRepository();
 
     @RepeatedTest(1000)
     @DisplayName("랜덤 숫자 만들기")
@@ -63,20 +60,12 @@ class BaseBallGameTest {
         }
     }
 
-
     @Test
-    void MemberSaveTest() {
-        //given
-        Member member = new Member();
+    void HashMapTest() {
+        Map<String, ArrayList<Integer>> hm = new HashMap<>();
 
-        Member member1 = memberRepository.save(member);
-        Member member2 = memberRepository.save(member);
-        Member member3 = memberRepository.save(member);
-        //when
 
-        System.out.println(member3.getRoomId());
-        System.out.println(member3.getRemainingCount());
-        //then
     }
+
 
 }
