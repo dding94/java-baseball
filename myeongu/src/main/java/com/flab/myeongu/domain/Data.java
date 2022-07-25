@@ -12,4 +12,5 @@ public class Data {
     private int strike;
     private int ball;
     private int out;
+
 }
