@@ -1,4 +1,4 @@
-package com.flab.myeongu.domain.score;
+package com.flab.myeongu.domain;
 
 import lombok.Getter;
 import lombok.Setter;

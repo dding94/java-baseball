@@ -1,4 +1,4 @@
-package com.flab.myeongu.domain;
+package com.flab.myeongu.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
