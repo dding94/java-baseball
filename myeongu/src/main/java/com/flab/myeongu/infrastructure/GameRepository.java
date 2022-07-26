@@ -17,8 +17,14 @@ public class GameRepository {
     private static final Map<Long, Game> store = new HashMap<>();
 
     public Game save(Game game) {
+        game.setRoomId(sequence++);
+        store.put(game.getRoomId(), game);
 
-        game.setRoomId(sequence);
+        return game;
+    }
+
+    public Game saveHistory(Game game, Score score, String userAnswer) {
+        game.saveHistory(score, userAnswer);
         store.put(game.getRoomId(), game);
 
         return game;
@@ -26,23 +32,6 @@ public class GameRepository {
 
     public Game findByRoomId(Long roomId) {
         return store.get(roomId);
-    }
-
-    public boolean isPlayCheck(Game game) {
-//        game.setRemainingCount(game.getRemainingCount() - 1);
-//        game.setAnswerCount(game.getAnswerCount() + 1);
-//
-//        if (game.getRemainingCount() < 0 || game.getAnswerCount() > 10) {
-//            game.setSuccess(false);
-//            return false;
-//        }
-
-        return true;
-    }
-
-    public void saveHistory(Game game, Score score, String userAnswer) {
-//        game.setScore(score);
-//        scoreRepository.save(game, userAnswer);
     }
 
 
