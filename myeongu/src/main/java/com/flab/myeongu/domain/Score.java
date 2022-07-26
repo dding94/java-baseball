@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Builder
 public class Score {
+
     private int strike;
     private int ball;
     private int out;

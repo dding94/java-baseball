@@ -18,7 +18,6 @@ public class GameService {
         return gameRepository.save(Game.makeGame());
     }
 
-
     public Game playingGame(Long roomId, String userAnswer) {
         Game game = gameRepository.findByRoomId(roomId);
 

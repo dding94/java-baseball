@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class History {
+
     private String answer;
     private Score result;
 

@@ -3,7 +3,6 @@ package com.flab.myeongu.presentation;
 import com.flab.myeongu.application.GameService;
 import com.flab.myeongu.domain.Game;
 import com.flab.myeongu.domain.History;
-import com.flab.myeongu.domain.dto.InputRequestVO;
 import lombok.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +23,7 @@ public class GameController {
     }
 
     @PostMapping("{roomId}/answer")
-    public GameResultResponse gamePlaying(@PathVariable Long roomId, @RequestBody InputRequestVO answer) {
+    public GameResultResponse gamePlaying(@PathVariable Long roomId, @RequestBody InputRequest answer) {
         Game game = gameService.playingGame(roomId, answer.getAnswer());
 
         return GameResultResponse.playGameResponse(game);
@@ -55,6 +54,7 @@ public class GameController {
     @Getter
     @AllArgsConstructor
     static class ErrorGameResponse<T> {
+
         private boolean success;
         private T data;
         private T Error;
@@ -75,7 +75,6 @@ public class GameController {
             return new EndGameResponse("CLOSE_GAME", "");
         }
     }
-
 
     @Getter
     @AllArgsConstructor
@@ -157,4 +156,9 @@ public class GameController {
         }
     }
 
+    @Getter
+    @AllArgsConstructor
+    public class InputRequest {
+        private String answer;
+    }
 }
