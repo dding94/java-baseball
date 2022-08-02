@@ -40,24 +40,28 @@ class BaseBallGameTest {
 
     @Test
     void answerCheck() {
-        String input = "365";
-        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(2, 1, 9));
+        String userAnswer = "365";
+        String answer = "222";
 
         int strike = 0;
         int ball = 0;
         int out = 0;
 
-        for (int i = 0; i < input.length(); i++) {
-            if (list.get(i) == Character.getNumericValue(input.charAt(i))) {
+        for (int i = 0; i < userAnswer.length(); i++) {
+            if (answer.charAt(i) == userAnswer.charAt(i)) {
                 strike++;
                 continue;
             }
-            if (list.contains(Character.getNumericValue(input.charAt(i)))) {
+            if (answer.contains(String.valueOf(userAnswer.charAt(i)))) {
                 ball++;
                 continue;
             }
             out++;
         }
+
+        System.out.println(strike);
+        System.out.println(ball);
+        System.out.println(out);
     }
 
     @Test
